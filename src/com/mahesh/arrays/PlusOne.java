@@ -33,6 +33,7 @@ public class PlusOne {
         }
         if (carry == 1) result[0] = 1;
         else result[0] = 0;
+        if (result[0] == 0) return Arrays.copyOfRange(result, 1, result.length);
         return result;
     }
 }
