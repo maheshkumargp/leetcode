@@ -4,11 +4,11 @@ public class FirstBadVersion {
 
 
     static boolean isBadVersion(int version) {
-        return version == 4 ? true : false;
+        return version == 4;
     }
 
     public static int firstBadVersion(int n) {
-        return isBad(1, n);
+        return firstBadVersion(1, n);
 
     }
 
@@ -20,10 +20,18 @@ public class FirstBadVersion {
             if (mid > 0) {
                 goodVersion = isBadVersion(mid - 1);
             }
-            if (badVersion == true && goodVersion == false) return mid;
-            return badVersion == true ? isBad(i, mid - 1) : isBad(mid, n);
+            if (badVersion && !goodVersion) return mid;
+            return badVersion ? isBad(i, mid - 1) : isBad(mid, n);
         }
         return n;
+    }
+
+    public static int firstBadVersion(int low, int high) {
+        if (low >= high) return low;
+        int x = (low + high) / 2;
+        boolean curr = isBadVersion(x);
+        if (curr) return firstBadVersion(low, x);
+        return firstBadVersion(x + 1, high);
     }
 
     public static void main(String[] args) {

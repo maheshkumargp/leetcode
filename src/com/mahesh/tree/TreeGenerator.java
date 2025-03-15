@@ -34,6 +34,36 @@ public class TreeGenerator {
         return root;
     }
 
+    public static Node createNode(Integer[] values) {
+        if (values == null || values.length == 0 || values[0] == null) {
+            return null;
+        }
+
+        Node root = new Node(values[0]);
+        int index = 1;
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (index < values.length) {
+            Node current = queue.poll();
+
+            if (values[index] != null) {
+                current.left = new Node(values[index]);
+                queue.offer(current.left);
+            }
+            index++;
+
+            if (index < values.length && values[index] != null) {
+                current.right = new Node(values[index]);
+                queue.offer(current.right);
+            }
+            index++;
+        }
+
+        return root;
+    }
+
     public static void main(String[] args) {
         Integer[] values = {3, 9, 20, null, null, 15, 7};
         TreeNode root = createTree(values);
